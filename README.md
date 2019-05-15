@@ -4,7 +4,7 @@
 
 ## API
 
-API: https://pub.dev/documentation/time_log/latest/time_log/TimeLog-class.html
+[API Documentation](https://pub.dev/documentation/serral/latest/serral/serral-library.html)
 
 ## Getting Started
 
