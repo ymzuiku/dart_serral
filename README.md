@@ -65,7 +65,7 @@ void main() {
     ctx.context['dog'] = 100;
   });
 
-  app.after((SerralCtx sr) {
+  app.after((SerralCtx ctx) {
     print('end');
   });
 

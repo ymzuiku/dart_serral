@@ -1,6 +1,6 @@
 name: serral
 description: Dart tiny web framework, like Koa
-version: 0.1.1
+version: 0.1.2
 author: pillar<ymzuiku@gmail.com>
 homepage: https://github.com/ymzuiku/dart_serral
 environment:
