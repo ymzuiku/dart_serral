@@ -56,13 +56,13 @@ void main() {
   final app = Serral();
   app.serve(port: 5100);
 
-  app.before((SerralCtx req) {
-    app.middlewareOfOrigin(req, '*');
+  app.before((SerralCtx ctx) {
+    app.middlewareOfOrigin(ctx, '*');
   });
 
-  app.before((SerralCtx sr) {
-    print(sr.request.uri.toString());
-    sr.context['dog'] = 100;
+  app.before((SerralCtx ctx) {
+    print(ctx.request.uri.toString());
+    ctx.context['dog'] = 100;
   });
 
   app.after((SerralCtx sr) {
