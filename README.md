@@ -171,3 +171,17 @@ void getHome(MongoCtx ctx) async {
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }
 ```
+
+### AOT build and AOT runtime
+
+AOT build:
+
+```sh
+dart2aot lib/main.dart lib/main.aot
+```
+
+use dartaotruntime run it:
+
+```sh
+dartaotruntime lib/main.aot
+```

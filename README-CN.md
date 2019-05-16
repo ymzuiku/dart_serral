@@ -75,15 +75,18 @@ void main() {
   app.serve(port: 5100);
 }
 
-// 实现路由
+// 实现该 GET 路由
 void getHome(SerralCtx ctx) async {
   // 读取 ctx.context, 检查前置中间键是否生效
   print(ctx.context['dog']);
+  // 查看请求路径参数
+  print(ctx.params);
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }
 
-// 实现路由
+// 实现该 POST 路由
 void postDog(SerralCtx ctx) async {
+  // 查看 post 请求的 body
   print(ctx.body);
   // 模拟异步, 检查后置中间键是否生效
   await Future.delayed(Duration(milliseconds: 300));
@@ -139,7 +142,7 @@ void main() async {
 
 void getHome(SerralCtx ctx) async {
   Db db = ctx.context['db'];
-  // use mongodb in some router:
+  在请求过程中
   print(db);
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }
@@ -152,6 +155,7 @@ import 'package:mongo_dart/mongo_dart.dart';
 
 import 'package:serral/main.dart';
 
+// mixin 扩展 SerralCtx 来添加各种所需的对象
 class MongoCtx with SerralCtx {
   Db db;
 }
@@ -160,11 +164,11 @@ void main() async {
   Db db = new Db("mongodb://127.0.0.1:27017/test");
   await db.open();
 
-  // Use MongoCtx repeat SerralCtx
+  // 使用 MongoCtx 替换 SerralCtx 作为上下文
   final app = Serral(()=> MongoCtx());
 
   app.before((MongoCtx ctx) {
-    // save db at MongodbCtx.db
+    // 在请求前置的中间键存储 db 对象的引用
     ctx.db = db;
   });
 
@@ -174,8 +178,24 @@ void main() async {
 }
 
 void getHome(MongoCtx ctx) async {
-  // use mongodb in some router:
+  // 在请求响应中使用 db 对象
   print(ctx.db);
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }
+```
+
+### AOT 编译及部署
+
+接下来我们要 DartVM 的性能, 我们将 source-code 进行 AOT 编译, AOT 编译后相对于 source-code 可以提升一个数量级或以上的性能:
+
+AOT 编译:
+
+```sh
+dart2aot lib/main.dart lib/main.aot
+```
+
+使用 dartaotruntime 启动生产版本:
+
+```sh
+dartaotruntime lib/main.aot
 ```
