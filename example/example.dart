@@ -22,12 +22,14 @@ void main() {
 }
 
 void getHome(SerralCtx ctx) async {
+  // read ctx.context, check app.before;
+  print(ctx.context['dog']);
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }
 
 void postDog(SerralCtx ctx) async {
   print(ctx.body);
-  // 模拟异步, 等待 300 ms, 测试 before middleware 是否执行
+  // use Futrue, check app.after;
   await Future.delayed(Duration(milliseconds: 300));
   ctx.send(200, 'order');
 }

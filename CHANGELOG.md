@@ -1,3 +1,5 @@
+## [0.0.7] - Use Likt Koa API
+
 ## [0.0.5] - Add middleware
 
 ## [0.0.1] - TODO: Add release date.
