@@ -1,3 +1,10 @@
+## [0.1.6] - add queryPaser
+
+```dart
+Map<String, dynamic> data = ctx.queryPaser('name=dog&age=10');
+print(data);
+```
+
 ## [0.1.5] - add API: addCorsHeaders
 
 open cros:

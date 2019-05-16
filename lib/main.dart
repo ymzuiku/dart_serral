@@ -23,6 +23,25 @@ class SerralCtx {
     response.write(jsonEncode(obj));
   }
 
+  Map<String, dynamic> queryPaser([String query]) {
+    if (query == null) {
+      query = request.uri.query;
+    }
+    List<String> list = query.split('&');
+    Map<String, dynamic> body = {};
+    for (var v in list) {
+      if (v.indexOf('=') == -1) {
+        body[v] = '';
+      } else {
+        List<String> sv = v.split('=');
+        String key = sv[0];
+        sv.removeAt(0);
+        body[key] = jsonDecode(sv.join(''));
+      }
+    }
+    return body;
+  }
+
   void close() {
     response.close();
   }
@@ -115,21 +134,6 @@ class Serral {
         ctx.bodyData = content;
         if (req.headers.contentType?.mimeType == 'application/json') {
           ctx.body = jsonDecode(content);
-          ctx.body.forEach((v, k) {
-            ctx.body[v] = jsonDecode(k);
-          });
-        } else if (req.uri.queryParameters.isEmpty) {
-          List<String> list = ctx.bodyData.split('&');
-          for (var v in list) {
-            if (v.indexOf('=') == -1) {
-              ctx.body[v] = '';
-            } else {
-              List<String> sv = v.split('=');
-              String key = sv[0];
-              sv.removeAt(0);
-              ctx.body[key] = jsonDecode(sv.join(''));
-            }
-          }
         }
       }
 
