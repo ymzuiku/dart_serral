@@ -130,8 +130,8 @@ void main() async {
 }
 
 void getHome(SerralCtx ctx) async {
-  Db db = ctx.context['db'];
   // use mongodb in some router:
+  Db db = ctx.context['db'];
   print(db);
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }

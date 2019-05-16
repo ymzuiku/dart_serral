@@ -141,8 +141,8 @@ void main() async {
 }
 
 void getHome(SerralCtx ctx) async {
+  // 在请求响应中使用 db 对象
   Db db = ctx.context['db'];
-  在请求过程中
   print(db);
   ctx.send(200, 'hello: ${ctx.context['dog']}');
 }
