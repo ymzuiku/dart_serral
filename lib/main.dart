@@ -30,7 +30,7 @@ class SerralCtx {
     List<String> list = query.split('&');
     Map<String, dynamic> body = {};
     for (var v in list) {
-      if (v.indexOf('=') == -1) {
+      if (v.contains('=')) {
         body[v] = '';
       } else {
         List<String> sv = v.split('=');

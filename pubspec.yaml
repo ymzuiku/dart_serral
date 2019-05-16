@@ -1,6 +1,6 @@
 name: serral
-description: Dart tiny web framework, like Koa
-version: 0.1.7
+description: Fast and productive web server framework provided by Dart, like Koa. Easy add middleware at before request and after request. Easy extend context Type and values.
+version: 0.1.8
 author: pillar<ymzuiku@gmail.com>
 homepage: https://github.com/ymzuiku/dart_serral
 environment:

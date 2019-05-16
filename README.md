@@ -1,6 +1,6 @@
 # serral
 
-Dart tiny web framework, like Koa
+Dart tiny web framework, like KoaFast and productive web server framework provided by Dart, like Koa. Easy add middleware at before request and after request. Easy extend context Type and values.
 
 ## API
 
