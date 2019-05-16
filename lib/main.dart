@@ -12,9 +12,15 @@ class SerralCtx {
   Map<String, dynamic> body = {};
   String bodyData;
   HttpResponse response;
+
   void send(int statusCode, Object obj) {
     response.statusCode = statusCode;
     response.write(obj);
+  }
+
+  void sendJson(int statusCode, Object obj) {
+    response.statusCode = statusCode;
+    response.write(jsonEncode(obj));
   }
 
   void close() {
@@ -80,17 +86,13 @@ class Serral {
     _suffixMiddleware.add(fn);
   }
 
-  void middlewareOfOrigin(SerralCtx ctx, [String value = '*']) {
-    ctx.response.headers.set('Access-Control-Allow-Origin', value);
-  }
-
-  void middlewareOfHeaderDefault(SerralCtx ctx) {
+  void addCorsHeaders(SerralCtx ctx) {
+    ctx.response.headers.add('Access-Control-Allow-Origin', '*');
     ctx.response.headers
-        .set('Access-Control-Expose-Headers', 'Authorization, Content-Type');
-    ctx.response.headers.set('Access-Control-Allow-Headers',
-        'Authorization, Origin, X-Requested-With, Content-Type, Accept');
-    ctx.response.headers
-        .set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+        .add('Access-Control-Allow-Methods', 'POST, PUT, DELETE, OPTIONS');
+    ctx.response.headers.add('Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.response.headers.add('Cache-control', 'no-cache');
   }
 
   // start server on port

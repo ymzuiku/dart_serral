@@ -1,3 +1,5 @@
+## [0.1.4] - add api app.sendJson
+
 ## [0.1.3] - fix parse body data
 
 - fix parse body data
