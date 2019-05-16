@@ -34,7 +34,7 @@ class Serral {
     _routers[router][method] = fn;
   }
 
-  void use(String router, Function fn) {
+  void ANY(String router, Function fn) {
     _setRouter(router, 'ANY', fn);
   }
 
@@ -117,12 +117,18 @@ class Serral {
           List<String> list = ctx.bodyData.split('&');
           for (var v in list) {
             List<String> sv = v.split('=');
-            ctx.body[sv[0]] = jsonDecode(sv[1]);
+            if (sv.length > 1) {
+              String key = sv[0];
+              sv.removeAt(0);
+              String value = sv.join('');
+              ctx.body[key] = jsonDecode(value);
+            }
           }
         }
       }
 
       if (_routers.containsKey(req.uri.path)) {
+        print('uuu${req.method}');
         if (_routers[req.uri.path].containsKey(req.method)) {
           await _routers[req.uri.path][req.method](ctx);
         } else if (_routers[req.uri.path].containsKey('ANY')) {

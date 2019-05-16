@@ -1,3 +1,8 @@
+## [0.1.3] - fix parse body data
+
+- fix parse body data
+- change API: serral.use -> serral.ANY
+
 ## [0.1.2] - Update README
 
 ## [0.1.1] - Update README
