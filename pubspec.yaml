@@ -1,6 +1,6 @@
 name: serral
 description: 只需要提供一个 router 映射表, 即可启动一个 web 服务
-version: 0.0.3
+version: 0.0.4
 author: pillar<ymzuiku@gmail.com>
 homepage: https://github.com/ymzuiku/dart-serral
 environment:
