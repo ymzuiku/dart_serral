@@ -1,17 +1,19 @@
-## [0.1.9] - change description
+## [0.1.10] - Add Chinese README.md
 
-## [0.1.7] - add mixin SerralCtx
+## [0.1.9] - Change description
+
+## [0.1.7] - Add mixin SerralCtx
 
 - Look README.md
 
-## [0.1.6] - add queryPaser
+## [0.1.6] - Add queryPaser
 
 ```dart
 Map<String, dynamic> data = ctx.queryPaser('name=dog&age=10');
 print(data);
 ```
 
-## [0.1.5] - add API: addCorsHeaders
+## [0.1.5] - Add API: addCorsHeaders
 
 open cros:
 
@@ -19,9 +21,9 @@ open cros:
 app.before(app.addCorsHeaders);
 ```
 
-## [0.1.4] - add api app.sendJson
+## [0.1.4] - Add api app.sendJson
 
-## [0.1.3] - fix parse body data
+## [0.1.3] - Fix parse body data
 
 - fix parse body data
 - change API: serral.use -> serral.ANY
