@@ -54,7 +54,6 @@ import 'package:serral/main.dart';
 
 void main() {
   final app = Serral();
-  app.serve(port: 5100);
 
   // open cros
   app.before(app.addCorsHeaders);
@@ -70,6 +69,8 @@ void main() {
 
   app.GET('/', getHome);
   app.POST('/dog', postDog);
+
+  app.serve(port: 5100);
 }
 
 void getHome(SerralCtx ctx) async {
@@ -96,4 +97,74 @@ Ok, server is running:
 
 ```
 serral runing: http://127.0.0.1:5100
+```
+
+## Use mongodb or other driver
+
+### Case 1: save in context:
+
+After install mongo_dart:
+
+```dart
+import 'package:mongo_dart/mongo_dart.dart';
+
+import 'package:serral/main.dart';
+
+void main() async {
+  Db db = new Db("mongodb://127.0.0.1:27017/test");
+  await db.open();
+
+  final app = Serral();
+
+  app.before((SerralCtx ctx) {
+    // add mongodb in context
+    ctx.context['db'] = db;
+  });
+
+  app.GET('/', getHome);
+
+  app.serve(port: 5100);
+}
+
+void getHome(SerralCtx ctx) async {
+  Db db = ctx.context['db'];
+  // use mongodb in some router:
+  print(db);
+  ctx.send(200, 'hello: ${ctx.context['dog']}');
+}
+```
+
+### Case 2: mixin SerralCtx
+
+```dart
+import 'package:mongo_dart/mongo_dart.dart';
+
+import 'package:serral/main.dart';
+
+class MongoCtx with SerralCtx {
+  Db db;
+}
+
+void main() async {
+  Db db = new Db("mongodb://127.0.0.1:27017/test");
+  await db.open();
+
+  // Use MongoCtx repeat SerralCtx
+  final app = Serral(()=> MongoCtx());
+
+  app.before((MongoCtx ctx) {
+    // save db at MongodbCtx.db
+    ctx.db = db;
+  });
+
+  app.GET('/', getHome);
+
+  app.serve(port: 5100);
+}
+
+void getHome(MongoCtx ctx) async {
+  // use mongodb in some router:
+  print(ctx.db);
+  ctx.send(200, 'hello: ${ctx.context['dog']}');
+}
 ```

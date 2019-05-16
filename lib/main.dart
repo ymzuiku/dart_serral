@@ -49,10 +49,16 @@ class SerralCtx {
 
 /// Serral class
 class Serral {
-  List<Function(SerralCtx)> _prefixMiddleware = [];
-  List<Function(SerralCtx)> _suffixMiddleware = [];
+  List<Function> _prefixMiddleware = [];
+  List<Function> _suffixMiddleware = [];
   Map<String, Map<String, Function>> _routers = {};
-  void _setRouter(String router, String method, Function(SerralCtx) fn) {
+  dynamic initCtx = () {
+    return SerralCtx();
+  };
+
+  Serral([this.initCtx]);
+
+  void _setRouter(String router, String method, Function fn) {
     if (!_routers.containsKey(router)) {
       _routers[router] = {};
     }
@@ -120,7 +126,7 @@ class Serral {
     print('serral running: http:127.0.0.1:$port');
 
     await for (HttpRequest req in server) {
-      var ctx = SerralCtx();
+      var ctx = initCtx();
       ctx.request = req;
       ctx.response = req.response;
       ctx.params = req.uri.queryParameters;
