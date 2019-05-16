@@ -18,7 +18,7 @@ class SerralCtx {
     response.write(obj);
   }
 
-  void sendJson(int statusCode, Object obj) {
+  void sendJson(int statusCode, Map<String, dynamic> obj) {
     response.statusCode = statusCode;
     response.write(jsonEncode(obj));
   }
@@ -115,22 +115,25 @@ class Serral {
         ctx.bodyData = content;
         if (req.headers.contentType?.mimeType == 'application/json') {
           ctx.body = jsonDecode(content);
-        } else {
+          ctx.body.forEach((v, k) {
+            ctx.body[v] = jsonDecode(k);
+          });
+        } else if (req.uri.queryParameters.isEmpty) {
           List<String> list = ctx.bodyData.split('&');
           for (var v in list) {
-            List<String> sv = v.split('=');
-            if (sv.length > 1) {
+            if (v.indexOf('=') == -1) {
+              ctx.body[v] = '';
+            } else {
+              List<String> sv = v.split('=');
               String key = sv[0];
               sv.removeAt(0);
-              String value = sv.join('');
-              ctx.body[key] = jsonDecode(value);
+              ctx.body[key] = jsonDecode(sv.join(''));
             }
           }
         }
       }
 
       if (_routers.containsKey(req.uri.path)) {
-        print('uuu${req.method}');
         if (_routers[req.uri.path].containsKey(req.method)) {
           await _routers[req.uri.path][req.method](ctx);
         } else if (_routers[req.uri.path].containsKey('ANY')) {

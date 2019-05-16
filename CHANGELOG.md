@@ -1,3 +1,11 @@
+## [0.1.5] - add API: addCorsHeaders
+
+open cros:
+
+```dart
+app.before(app.addCorsHeaders);
+```
+
 ## [0.1.4] - add api app.sendJson
 
 ## [0.1.3] - fix parse body data

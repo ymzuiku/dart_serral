@@ -4,9 +4,8 @@ void main() {
   final app = Serral();
   app.serve(port: 5100);
 
-  app.before((SerralCtx ctx) {
-    app.middlewareOfOrigin(ctx, '*');
-  });
+  // open cros
+  app.before(app.addCorsHeaders);
 
   app.before((SerralCtx ctx) {
     print(ctx.request.uri.toString());
