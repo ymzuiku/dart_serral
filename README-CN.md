@@ -49,7 +49,7 @@ $ touch lib/main.dart
 编辑 lib/main.dart:
 
 ```dart
-import 'package:serral/main.dart';
+import 'package:serral/serral.dart';
 
 void main() {
   final app = Serral();
@@ -122,7 +122,7 @@ dev_dependencies:
 ```dart
 import 'package:mongo_dart/mongo_dart.dart';
 
-import 'package:serral/main.dart';
+import 'package:serral/serral.dart';
 
 void main() async {
   Db db = new Db("mongodb://127.0.0.1:27017/test");
@@ -153,7 +153,7 @@ void getHome(SerralCtx ctx) async {
 ```dart
 import 'package:mongo_dart/mongo_dart.dart';
 
-import 'package:serral/main.dart';
+import 'package:serral/serral.dart';
 
 // mixin 扩展 SerralCtx 来添加各种所需的对象
 class MongoCtx with SerralCtx {

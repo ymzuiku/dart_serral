@@ -1,4 +1,4 @@
-import 'package:serral/main.dart';
+import 'package:serral/serral.dart';
 
 void main() {
   final app = Serral();

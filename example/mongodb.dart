@@ -1,6 +1,6 @@
 import 'package:mongo_dart/mongo_dart.dart';
 
-import 'package:serral/main.dart';
+import 'package:serral/serral.dart';
 
 class MongoCtx with SerralCtx {
   Db db;
