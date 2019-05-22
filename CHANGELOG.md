@@ -2,6 +2,8 @@
 
 Change: lib/main.dart -> lib/serral.dart
 
+## [0.1.12] - Update Readme
+
 ## [0.1.11] - Fix Serral initCtx
 
 ## [0.1.10] - Add Chinese README.md
