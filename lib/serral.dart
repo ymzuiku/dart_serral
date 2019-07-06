@@ -67,40 +67,40 @@ class Serral {
     _routers[router][method] = fn;
   }
 
-  void ANY(String router, Function fn) {
-    _setRouter(router, 'ANY', fn);
+  void ANY(String uri, Function fn) {
+    _setRouter(uri, 'ANY', fn);
   }
 
-  void GET(String router, Function fn) {
-    _setRouter(router, 'GET', fn);
+  void GET(String uri, Function fn) {
+    _setRouter(uri, 'GET', fn);
   }
 
-  void POST(String router, Function fn) {
-    _setRouter(router, 'POST', fn);
+  void POST(String uri, Function fn) {
+    _setRouter(uri, 'POST', fn);
   }
 
-  void PUT(String router, Function fn) {
-    _setRouter(router, 'PUT', fn);
+  void PUT(String uri, Function fn) {
+    _setRouter(uri, 'PUT', fn);
   }
 
-  void DELETE(String router, Function fn) {
-    _setRouter(router, 'DELETE', fn);
+  void DELETE(String uri, Function fn) {
+    _setRouter(uri, 'DELETE', fn);
   }
 
-  void TRACE(String router, Function fn) {
-    _setRouter(router, 'TRACE', fn);
+  void TRACE(String uri, Function fn) {
+    _setRouter(uri, 'TRACE', fn);
   }
 
-  void CONNECT(String router, Function fn) {
-    _setRouter(router, 'CONNECT', fn);
+  void CONNECT(String uri, Function fn) {
+    _setRouter(uri, 'CONNECT', fn);
   }
 
   void HEAD(String router, Function fn) {
     _setRouter(router, 'HEAD', fn);
   }
 
-  void OPTIONS(String router, Function fn) {
-    _setRouter(router, 'OPTIONS', fn);
+  void OPTIONS(String uri, Function fn) {
+    _setRouter(uri, 'OPTIONS', fn);
   }
 
   /// before router runing
